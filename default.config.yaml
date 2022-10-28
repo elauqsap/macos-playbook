@@ -1,0 +1,118 @@
+---
+downloads: ~/.ansible-downloads/
+
+# Set to 'true' to configure the Dock via dockutil.
+configure_dock: true
+dockitems_remove:
+  - Launchpad
+  - TV
+  - Podcasts
+  - 'App Store'
+dockitems_persist: []
+# - name: "Sublime Text"
+#   path: "/Applications/Sublime Text.app/"
+#   pos: 5
+
+# Set to 'true' to configure firacode fonts
+configure_firacode: true
+
+# Set to 'true' to configure iTerm2 profiles
+configure_iterm2: true
+
+# Set to 'true' to configure oh-my-zsh
+configure_omz: true
+oh_my_zsh:
+  aliases:
+    - name: encrypt
+      command: "openssl enc -aes-256-cbc -salt"
+    - name: decrypt
+      command: "openssl enc -d -aes-256-cbc"
+  theme: agnoster
+  plugins:
+    - aliases
+    - ansible
+    - aws
+    - battery
+    - branch
+    - brew
+    - common-aliases
+    - copypath
+    - docker
+    - encode64
+    - gcloud
+    - kubectl
+    - kubectx 
+    - terraform
+    - tmux
+
+# Set to 'true' to configure ssh
+configure_ssh: true
+ssh:
+  configs:
+    github.com:
+      User: git
+      IdentityFile: /Users/pdagostino/.ssh/git
+
+# Set to 'true' to configure tmux
+configure_tmux: true
+
+# Set to 'true' to configure vim
+configure_vim: true
+
+# Set to 'true' to configure oh-my-zsh
+configure_vscode: true
+# vscode:
+#   extentions: []
+
+homebrew_installed_packages:
+  - cmake
+  - dive
+  - git
+  - go
+  - gpg
+  - helm
+  - httpie
+  - ipcalc
+  - jq
+  - k9s
+  - kubectl
+  - kubectx
+  - llvm
+  - macvim
+  - mitmproxy
+  - nmap
+  - npm
+  - openssl
+  - ssh-copy-id
+  - terraform
+  - tree
+  - zsh-history-substring-search
+
+homebrew_taps:
+  - homebrew/core
+  - homebrew/cask
+
+homebrew_cask_appdir: /Applications
+homebrew_cask_apps:
+  - powershell
+
+# See `geerlingguy.mas` role documentation for usage instructions.
+configure_mas: false
+mas_email: ""
+mas_password: ""
+mas_installed_apps: 
+  - { id: 441258766, name: "Magnet(2.9.0)" }
+mas_uninstalled_apps:
+  - { id: 408981434, name: "iMovie" }
+  - { id: 409183694, name: "Keynote" }
+  - { id: 409201541, name: "Pages" }
+  - { id: 409203825, name: "Numbers" }
+  - { id: 682658836, name: "GarageBand" }
+
+pip_packages:
+  - name: ansible
+    state: present
+    version: N/A
+
+# Glob pattern to ansible task files to run after all other tasks are finished.
+post_provision_tasks: []

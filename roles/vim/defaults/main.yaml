@@ -1,0 +1,23 @@
+vim:
+  plugins:
+    - name: YouCompleteMe
+      repo: https://github.com/ycm-core/YouCompleteMe
+      version: master
+    - name: NerdTree
+      repo: https://github.com/preservim/nerdtree
+      version: master
+    - name: Syntastic
+      repo: https://github.com/vim-syntastic/syntastic
+      version: master
+    - name: vim-airline
+      repo: https://github.com/vim-airline/vim-airline
+      version: master
+    - name: vim-fugitive
+      repo: https://github.com/tpope/vim-fugitive
+      version: master
+    - name: vim-go
+      repo: https://github.com/fatih/vim-go
+      version: master
+    - name: vim-ruby
+      repo: https://github.com/vim-ruby/vim-ruby
+      version: master

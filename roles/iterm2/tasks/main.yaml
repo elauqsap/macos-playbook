@@ -1,0 +1,7 @@
+---
+- name: Ensure iTerm2 Dynamic Profiles are installed
+  ansible.builtin.template:
+    src: profiles.j2
+    dest: '/Users/{{ ansible_user_id }}/Library/Application Support/iTerm2/DynamicProfiles/custom_profiles.json'
+    backup: yes
+    mode: 'u=rw,go=r'

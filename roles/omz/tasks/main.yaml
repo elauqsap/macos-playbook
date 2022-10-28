@@ -1,0 +1,40 @@
+---
+- name: clone oh-my-zsh for users
+  # core.autocrlf=input prevents https://github.com/robbyrussell/oh-my-zsh/issues/4402
+  command: 'git clone -c core.autocrlf=input --depth=1 https://github.com/robbyrussell/oh-my-zsh.git .oh-my-zsh'
+  args:
+    chdir: '~{{ ansible_user_id }}'
+    creates: '~{{ ansible_user_id }}/.oh-my-zsh'
+  tags:
+    # Suppress warning: [ANSIBLE0006] git used in place of git module
+    # Git module doesn't allow us to set `core.autocrlf=input`.
+    - skip_ansible_lint
+    - install
+
+
+- name: set permissions of oh-my-zsh for users
+  ansible.builtin.file:
+    path: '~{{ ansible_user_id }}/.oh-my-zsh'
+    # Prevent the cloned repository from having insecure permissions. Failing to do
+    # so causes compinit() calls to fail with "command not found: compdef" errors
+    # for users with insecure umasks (e.g., "002", allowing group writability).
+    mode: 'go-w'
+    recurse: yes
+  tags:
+    - install
+
+- name: set default shell for users
+  ansible.builtin.user:
+    name: '{{ ansible_user_id }}'
+    shell: /bin/zsh
+  tags:
+    - install
+
+- name: write .zshrc for users
+  ansible.builtin.template:
+    src: zshrc.j2
+    dest: '~{{ ansible_user_id }}/.zshrc'
+    backup: yes
+    mode: 'u=rw,go=r'
+  tags:
+    - config

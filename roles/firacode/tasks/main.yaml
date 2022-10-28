@@ -1,0 +1,32 @@
+---
+- name: Ensure tmp directory for remote fonts exists
+  ansible.builtin.file:
+    path: "/tmp/Fira_Code_v{{ firacode.version }}"
+    state: directory
+    mode: '0755'
+  tags:
+    - install
+
+- name: Ensure remote fonts are downloaded and unarchived in tmp
+  ansible.builtin.unarchive:
+    src: "https://github.com/tonsky/FiraCode/releases/download/{{ firacode.version }}/Fira_Code_v{{ firacode.version }}.zip"
+    dest: "/tmp/Fira_Code_v{{ firacode.version }}"
+    remote_src: yes
+  tags:
+    - install
+
+- name: Ensure fonts are added to the users profile
+  ansible.builtin.copy:
+    src: "/tmp/Fira_Code_v{{ firacode.version }}/{{ firacode.path }}/{{ item }}"
+    dest: "/Users/{{ ansible_user_id }}/Library/Fonts/{{ item }}"
+  with_items:
+    - "{{ firacode.fonts }}"
+  tags:
+    - install
+
+- name: Create a directory if it does not exist
+  ansible.builtin.file:
+    path: "/tmp/Fira_Code_v{{ firacode.version }}"
+    state: absent
+  tags:
+    - install

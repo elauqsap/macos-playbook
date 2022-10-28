@@ -1,0 +1,79 @@
+{
+    // Editor global settings
+    "editor.fontFamily": "FiraCodeRoman-SemiBold",
+    "editor.fontLigatures": true,
+    "editor.fontSize": 15,
+    "editor.tabSize": 2,
+
+    // Window global settings
+    "window.restoreFullscreen": false,
+    "window.newWindowDimensions": "maximized",
+    "window.zoomLevel": -1, // helps with font ligatures
+
+    // Workbench global settings
+    "workbench.colorTheme": "One Dark Pro",
+    "workbench.editor.closeOnFileDelete": true,
+  
+    // Configure tab size by language
+    "[json]": {
+        "editor.tabSize": 4
+    },
+    "[python]": {
+        "editor.tabSize": 4
+    },
+    "[yaml]": {
+        "editor.tabSize": 2
+    },
+
+    // Go Linter Settings
+    "go.lintOnSave": true,
+    "go.lintTool": "golint",
+    "go.testFlags": [
+        "-v",
+    ],
+
+    // Python Linter Settings
+    "python.languageServer": "None",
+    "python.defaultInterpreterPath": "/usr/local/bin/python3",
+
+    // TODO Tree Settings
+    "todo-tree.general.tags": [
+        "IDEA:",
+        "NOTE:",
+        "TODO:",
+        "FIXME:",
+        "WARNING:"
+    ],
+    "todo-tree.highlights.customHighlight": {
+        "IDEA:": {
+            "foreground": "#282c34",
+            "background": "#61afef",
+            "icon": "light-bulb",
+            "iconColour": "#61afef"
+        },
+        "NOTE:": {
+            "foreground": "#282c34",
+            "background": "#98c379",
+            "icon": "note",
+            "iconColour": "#98c379"
+        },
+        "TODO:": {
+            "foreground": "#282c34",
+            "background": "#e5c07b",
+            "icon": "pencil",
+            "iconColour": "#e5c07b"
+        },
+        "FIXME:": {
+            "foreground": "#282c34",
+            "background": "#ff6d40",
+            "icon": "flame",
+            "iconColour": "#ff6d40"
+        },
+        "WARNING:": {
+            "foreground": "#282c34",
+            "background": "#e06c75",
+            "icon": "alert",
+            "iconColour": "#e06c75"
+        }
+    }
+}

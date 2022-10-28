@@ -1,0 +1,24 @@
+---
+- name: Ensure Visual Code Studio extensions are installed
+  block:
+    - name: Ensure Visual Code Studio binary exists
+      ansible.builtin.command: /usr/local/bin/code -v
+
+    - name: Ensure Visual Code Studio extensions are installed
+      ansible.builtin.command: /usr/local/bin/code --install-extension {{ item | basename }}
+      with_items:
+       - "{{ vscode.extensions }}"
+  rescue:
+    - name: 
+      ansible.builtin.debug:
+        msg: 'Visual Code Studio binary not in PATH, see https://code.visualstudio.com/docs/setup/mac#_launching-from-the-command-line'
+  tags:
+    - install
+
+- name: Ensure Visual Code Studio settings are installed
+  ansible.builtin.copy:
+    src: settings.jsonc
+    dest: '/Users/{{ ansible_user_id }}/Library/Application Support/Code/User/settings.json'
+    mode: 'u=rw,go=r'
+  tags:
+    - config

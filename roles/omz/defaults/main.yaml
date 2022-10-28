@@ -1,0 +1,24 @@
+oh_my_zsh:
+  aliases:
+    - name: encrypt
+      command: "openssl enc -aes-256-cbc -salt"
+    - name: decrypt
+      command: "openssl enc -d -aes-256-cbc"
+  theme: agnoster
+  plugins:
+    - aliases
+    - ansible
+    - aws
+    - battery
+    - branch
+    - brew
+    - common-aliases
+    - copypath
+    - docker
+    - encode64
+    - gcloud
+    - git-prompt
+    - kubectl
+    - kubectx 
+    - terraform
+    - tmux

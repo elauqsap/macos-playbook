@@ -1,0 +1,15 @@
+# - name: Ensure the required SSH keys are created for the user
+#   ansible.builtin.user:
+#     name: {{ ansible_user_id }}
+#     generate_ssh_key: yes
+#     ssh_key_file: /Users/{{ ansible_user_id }}/.ssh/{{ item.name }}
+#   with_items:
+#     - "{{ ssh.keys }}"
+
+- name: Ensure SSH hosts are configured
+  ansible.builtin.template:
+    src: config.j2
+    dest: '/Users/{{ ansible_user_id }}/.ssh/config'
+    mode: 'u=rw,go=r'
+  with_items:
+    - "{{ ssh.configs }}"

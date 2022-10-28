@@ -1,0 +1,9 @@
+firacode:
+  version: 6.2
+  path: ttf
+  fonts:
+    - FiraCode-Bold.ttf
+    - FiraCode-Light.ttf
+    - FiraCode-Medium.ttf
+    - FiraCode-Regular.ttf
+    - FiraCode-Retina.ttf

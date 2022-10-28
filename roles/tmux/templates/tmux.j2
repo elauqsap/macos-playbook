@@ -1,0 +1,44 @@
+# Binding changes
+# split panes using | and -
+bind | split-window -h
+bind - split-window -v
+unbind '"'
+unbind %
+
+# reload config file
+bind r source-file /Users/{{ ansible_user_id }}/.tmux.conf \; display-message "Config reloaded..."
+
+# option+arrow to switch panes
+bind -n M-Left select-pane -L
+bind -n M-Right select-pane -R
+bind -n M-Up select-pane -U
+bind -n M-Down select-pane -D
+
+# shift+arrow to switch windows
+bind -n S-Left previous-window
+bind -n S-Right next-window
+
+# Enable mouse mode
+set -g mouse on
+
+set-option -g allow-rename off
+
+set -g @tpm_plugins '                \
+    caiogondim/maglev                \
+    tmux-plugins/tpm                 \
+    tmux-plugins/tmux-sensible       \
+    tmux-plugins/tmux-resurrect      \
+    tmux-plugins/tmux-continuum      \
+    tmux-plugins/tmux-yank           \
+    tmux-plugins/tmux-pain-control   \
+    tmux-plugins/tmux-copycat        \
+    tmux-plugins/tmux-open           \
+    tmux-plugins/tmux-battery        \
+    tmux-plugins/tmux-cpu            \
+'
+
+set -g @continuum-restore 'on'
+
+set -g @yank_selection 'primary'
+
+run '~/.tmux/plugins/tpm/tpm'

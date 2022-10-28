@@ -1,0 +1,27 @@
+---
+- name: Ensure tpm directory exists.
+  ansible.builtin.file:
+    path: '~{{ ansible_user_id }}/.tmux/plugins/tpm'
+    state: directory
+    recurse: true
+    mode: '0755'
+  tags:
+    - install
+
+- name: Ensure tpm is installed.
+  ansible.builtin.git:
+    repo: https://github.com/tmux-plugins/tpm.git
+    dest: '~{{ ansible_user_id }}/.tmux/plugins/tpm'
+    single_branch: yes
+    version: master
+  tags:
+    - install
+
+- name: Ensure tmux config is written to users directory.
+  ansible.builtin.template:
+    src: tmux.j2
+    dest: '~{{ ansible_user_id }}/.tmux.conf'
+    backup: yes
+    mode: 'u=rw,go=r'
+  tags:
+    - config

@@ -1,0 +1,83 @@
+---
+- name: Ensure tmp directory for remote files exists
+  ansible.builtin.file:
+    path: "/tmp/vim"
+    state: directory
+    mode: '0755'
+  tags:
+    - install
+
+- name: Ensure autoload directory for pathogen exists
+  ansible.builtin.file:
+    path: "~/.vim/autoload"
+    state: directory
+    recurse: true
+    mode: '0755'
+  tags:
+    - install
+
+- name: Ensure pathogen is installed
+  ansible.builtin.git:
+    repo: https://github.com/tpope/vim-pathogen
+    dest: "/tmp/vim"
+    single_branch: yes
+    version: master
+  tags:
+    - install
+
+- name: Ensure vimrc is configured
+  ansible.builtin.copy:
+    src: "/tmp/vim/autoload/pathogen.vim"
+    dest: '~/.vim/autoload/pathogen.vim'
+    mode: 'u=rw,go=r'
+  tags:
+    - install
+
+- name: Ensure color directory for themes exists
+  ansible.builtin.file:
+    path: "~/.vim/colors"
+    state: directory
+    recurse: true
+    mode: '0755'
+  tags:
+    - install
+
+- name: Ensure onedark.vim color is installed
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/joshdick/onedark.vim/main/autoload/onedark.vim
+    dest: "~/.vim/colors/onedark.vim"
+  tags:
+    - install
+
+- name: Ensure onedark.vim autoload is installed
+  ansible.builtin.get_url:
+    url: https://raw.githubusercontent.com/joshdick/onedark.vim/main/autoload/onedark.vim
+    dest: "~/.vim/autoload/onedark.vim"
+  tags:
+    - install
+
+- name: Ensure vimrc is configured
+  ansible.builtin.copy:
+    src: vimrc
+    dest: '~/.vimrc'
+    mode: 'u=rw,go=r'
+  tags:
+    - config
+
+- name: Ensure vim plugins are installed
+  ansible.builtin.git:
+    repo: "{{ item.repo }}"
+    dest: "~/.vim/bundle/{{ item.name }}"
+    single_branch: yes
+    version: "{{ item.version }}"
+  with_items:
+    - "{{ vim.plugins }}"
+  tags:
+    - plugins
+
+- name: Ensure YCM is compiled
+  ansible.builtin.command: /opt/homebrew/bin/python3 install.py --go-completer
+  args:
+    chdir: "~/.vim/bundle/YouCompleteMe"
+  tags:
+    - plugins

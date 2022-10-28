@@ -1,0 +1,5 @@
+ssh:
+  config:
+    github.com:
+      User: git
+      IdentityFile: ~/.ssh/git
